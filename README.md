@@ -8,7 +8,8 @@ Based on react-native-scrollable-tab-view, the head view slides with each tab, a
 2. import ScrollTabView, { ScrollView, FlatList } from 'react-native-scroll-head-tab-view';
 
 #  Basic usage
-`import React, { useState, useCallback } from 'react';
+`
+import React, { useState, useCallback } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import ScrollTabView, { ScrollView, FlatList } from 'react-native-scroll-head-tab-view';
 
