@@ -1,0 +1,25 @@
+{
+    "name": "react-native-scroll-head-tab-view",
+    "version": "0.1",
+    "description": "",
+    "main": "index.ts",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/wangyukun-hxb/react-native-scroll-head-tab-view"
+    },
+    "keywords": [
+        "react-native-component",
+        "react-native",
+        "tab",
+        "scrollable"
+    ],
+    "author": "wangyukun",
+    "dependencies": {
+        "@react-native-community/viewpager": "^2.0.1",
+        "memoize-one": "^5.1.1"
+    },
+    "devDependencies": {
+        "eslint": "^7.6.0",
+        "typescript": "^3.9.7"
+    }
+}
