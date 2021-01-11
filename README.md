@@ -1,1 +1,1 @@
-# react-native-scrollHeadTabView
+# react-native-scroll-head-tab-view
