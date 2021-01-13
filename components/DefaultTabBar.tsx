@@ -49,7 +49,7 @@ export default class DefaultTabBar extends Component<Props> {
             ...tabStyle,
         };
         const tabText = {
-            fontSize: font(16),
+            fontSize: 16,
             ...textStyle,
             ...tabTextStyle,
         };
@@ -79,7 +79,7 @@ export default class DefaultTabBar extends Component<Props> {
             width: calcUnderlineWidth,
             height: 3,
             borderRadius: 3,
-            backgroundColor: Theme.primaryColor,
+            backgroundColor: '#FE1966',  
             bottom: 1,
             left: underlineLeft,
             ...underlineStyle,
@@ -136,17 +136,17 @@ export default class DefaultTabBar extends Component<Props> {
 
 const shadowSetting = {
     width: Dimensions.get('window').width,
-    height: pixel(Theme.NAVBAR_HEIGHT),
+    height: 50,
     color: '#E8E8E8',
-    border: pixel(5),
-    radius: pixel(15),
+    border: 5,
+    radius: 15,
     opacity: 0.5,
     x: 0,
     y: 0,
 };
 const styles = StyleSheet.create({
     tabBar: {
-        height: pixel(Theme.NAVBAR_HEIGHT),
+        height: 50,
         flexDirection: 'row',
         alignItems: 'stretch',
         borderBottomWidth: StyleSheet.hairlineWidth,

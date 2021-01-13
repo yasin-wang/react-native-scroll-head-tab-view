@@ -4,8 +4,14 @@ Based on react-native-scrollable-tab-view, the head view slides with each tab, a
 ![demo](https://i.postimg.cc/vZbK17d8/ezgif-7-117c0884083a-1.gif)
 
 #  Add to project
-1. yarn add react-native-scroll-head-tab-view;
-2. import ScrollTabView, { ScrollView, FlatList } from 'react-native-scroll-head-tab-view';
+```shell
+// note: skip this step if scrollable-tab-view is installed
+yarn add @react-native-community/viewpager;
+```
+
+```shell
+yarn add react-native-scroll-head-tab-view;
+```
 
 #  Basic usage
 ```

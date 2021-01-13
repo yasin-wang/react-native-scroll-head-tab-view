@@ -2,7 +2,7 @@
   "name": "react-native-scroll-head-tab-view",
   "version": "1.0.0",
   "description": "Based on react-native-scrollable-tab-view, the header slides with each tab, and the TabBar reaches a certain sliding distance to attach to the top",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {},
   "repository": {
     "type": "git",
@@ -20,10 +20,10 @@
   },
   "homepage": "https://github.com/wangyukun-hxb/react-native-scroll-head-tab-view#readme",
   "peerDependencies": {
-    "react-native": ">=0.50.0"
+    "react-native": ">=0.50.0",
+    "@react-native-community/viewpager": "^2.0.1"
   },
   "dependencies": {
-    "@react-native-community/viewpager": "^2.0.1",
     "memoize-one": "^5.1.1"
   },
   "devDependencies": {
