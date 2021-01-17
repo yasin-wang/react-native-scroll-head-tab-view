@@ -33,38 +33,34 @@ const compose = (WrappedComponent) => {
 
         addListener() {
             const { containerOffsetY } = this.props;
-            containerOffsetY?.addListener(this.updateView);
+            containerOffsetY?.addListener(this.tabViewScrollHandler);
         }
 
         removeListener() {
             const { containerOffsetY } = this.props;
-            containerOffsetY?.removeListener(this.updateView);
+            containerOffsetY?.removeListener(this.tabViewScrollHandler);
         }
 
         scrollTo(e) {
             if (this._scrollViewRef) {
-                const elementNode = this._scrollViewRef;
-                if (elementNode?.scrollTo) {
-                    elementNode.scrollTo({ x: 0, y: e.y, animated: false });
-                } else if (elementNode?.scrollToOffset) {
-                    elementNode.scrollToOffset({ offset: e.y, animated: false });
-                } else if (elementNode?.scrollToLocation) {
-                    elementNode.scrollToLocation({ itemIndex: 0, sectionIndex: 0, viewOffset: -e.y, animated: false });
+                if (this._scrollViewRef?.scrollTo) {
+                    this._scrollViewRef.scrollTo({ x: 0, y: e.y, animated: false });
+                } else if (this._scrollViewRef?.scrollToOffset) {
+                    this._scrollViewRef.scrollToOffset({ offset: e.y, animated: false });
                 }
             }
         }
 
-        // 其它TabView同步同步OffsetY
-        updateView = (e) => {
-            const { index, headerHeight, isActive } = this.props;
-            if (isActive) return;
-            if (e.value > headerHeight) {
-                if (this.scrollOffsetY < headerHeight) {
+        // 其它TabView同步OffsetY
+        tabViewScrollHandler = (e) => {
+            const { headerHeight, isActive } = this.props;
+            if (!isActive) {
+                if (e.value > headerHeight && this.scrollOffsetY < headerHeight) {
                     this.scrollTo({ y: headerHeight });
+                } else {
+                    this.scrollTo({ y: e.value });
                 }
-                return;
             }
-            this.scrollTo({ y: e.value });
         };
 
         // 内容高度变化后，参数调整offset

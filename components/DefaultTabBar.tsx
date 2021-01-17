@@ -25,7 +25,7 @@ interface Props extends ViewProps {
     hiddenUnderLine?: boolean;
     textStyle?: TextStyle;
     activeTextStyle?: TextStyle;
-    inactiveTextColor?: TextStyle;
+    inactiveTextStyle?: TextStyle;
 }
 
 const SCALE_NUMBER = 2;
@@ -34,13 +34,13 @@ export default class DefaultTabBar extends Component<Props> {
     static defaultProps = {
         paddingInset: 0,
         activeTextStyle: { color: '#202020' },
-        inactiveTextColor: { color: '#909090' },
+        inactiveTextStyle: { color: '#909090' },
         hiddenUnderLine: false,
     };
 
     _renderTab(name: string, page: number, isTabActive: boolean, onPressHandler: Function) {
-        const { tabWidth, tabStyle, textStyle, activeTextStyle, inactiveTextColor } = this.props;
-        const tabTextStyle = isTabActive ? activeTextStyle : inactiveTextColor;
+        const { tabWidth, tabStyle, textStyle, activeTextStyle, inactiveTextStyle } = this.props;
+        const tabTextStyle = isTabActive ? activeTextStyle : inactiveTextStyle;
         const tabWidthStyle = tabWidth ? { width: tabWidth } : { flex: 1 };
         const tabItem = {
             alignItems: 'center',
@@ -73,7 +73,7 @@ export default class DefaultTabBar extends Component<Props> {
         const numberOfTabs = tabs.length;
         const calcTabWidth = tabWidth || (containerWidth - paddingInset) / numberOfTabs;
         const calcUnderlineWidth = Math.min(tabUnderlineWidth || calcTabWidth * 0.6, calcTabWidth);
-        const underlineLeft = (calcTabWidth - calcUnderlineWidth) / 2 + paddingInset / 2;
+        const underlineLeft = (calcTabWidth - calcUnderlineWidth) / 2 + paddingInset;
         const tabUnderlineStyle = {
             position: 'absolute',
             width: calcUnderlineWidth,
