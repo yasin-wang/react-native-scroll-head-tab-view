@@ -83,7 +83,7 @@ export default function Example() {
             <ScrollTabView headerHeight={headerHeight} renderScrollHeader={_renderScrollHeader}>
                 <TabView1 tabLabel="tab1" />
                 <TabView2 tabLabel="tab2" />
-                <TabView3 abLabel="tab3" />
+                <TabView3 tabLabel="tab3" />
             </ScrollTabView>
         </View>
     );

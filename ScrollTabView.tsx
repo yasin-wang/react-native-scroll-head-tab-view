@@ -413,7 +413,7 @@ export default class ScrollableTabView extends Component<Props> {
             } else {
                 this.setState({ containerWidth: width });
             }
-            this.requestAnimationFrame(() => {
+            InteractionManager.runAfterInteractions(() => {
                 this.goToPage(this.state.currentPage);
             });
         }

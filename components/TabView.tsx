@@ -76,8 +76,8 @@ const compose = (WrappedComponent) => {
         // 计算底部占位高度
         onContentSizeChange = (contentWidth, contentHeight) => {
             const { bottomPadding } = this.state;
-            const { index, sceneHeight } = this.props;
-            if (Math.ceil(contentHeight) < sceneHeight) {
+            const { sceneHeight } = this.props;
+            if (bottomPadding <= 0) {
                 // 添加占位高度 bottomPadding
                 const newBottomPadding = bottomPadding + sceneHeight - contentHeight;
                 this.setState({ bottomPadding: newBottomPadding });

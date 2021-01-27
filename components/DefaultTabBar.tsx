@@ -87,8 +87,7 @@ export default class DefaultTabBar extends Component<Props> {
 
         // 计算underline动画系数
         const scaleValue = () => {
-            const number = 4;
-            const arr = new Array(number * 2);
+            const arr = new Array(numberOfTabs * 2);
             return arr.fill(0).reduce(
                 function (pre, cur, idx) {
                     idx == 0 ? pre.inputRange.push(cur) : pre.inputRange.push(pre.inputRange[idx - 1] + 0.5);
