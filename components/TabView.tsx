@@ -73,23 +73,20 @@ const compose = (WrappedComponent) => {
             }
         };
 
-        // 计算底部占位高度
         onContentSizeChange = (contentWidth, contentHeight) => {
             const { bottomPadding } = this.state;
-            const { sceneHeight } = this.props;
+            const { headerHeight, sceneHeight } = this.props;
+            const remainingHeight = contentHeight - sceneHeight;
+
             if (bottomPadding <= 0) {
-                // 添加占位高度 bottomPadding
-                const newBottomPadding = bottomPadding + sceneHeight - contentHeight;
-                this.setState({ bottomPadding: newBottomPadding });
-            } else {
+                const makePaddingBottom = sceneHeight - contentHeight;
+                this.setState({ bottomPadding: makePaddingBottom });
+            } else if (remainingHeight > 1) {
                 // 内容高度超过容器高度，调整Tab的Offset，并且减少多余占位高bottomPadding
                 this.adjustScrollOffset();
-                if (bottomPadding > 0) {
-                    const remainingHeight = contentHeight - sceneHeight;
-                    const newBottomPadding = remainingHeight > bottomPadding ? 0 : bottomPadding - remainingHeight;
-                    if (newBottomPadding != bottomPadding) {
-                        this.setState({ bottomPadding: newBottomPadding });
-                    }
+                const newBottomPadding = remainingHeight > bottomPadding ? 0 : bottomPadding - remainingHeight;
+                if (newBottomPadding != bottomPadding) {
+                    this.setState({ bottomPadding: newBottomPadding });
                 }
             }
         };
