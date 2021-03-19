@@ -51,7 +51,7 @@ const compose = (WrappedComponent) => {
             }
         }
 
-        // 其它TabView同步OffsetY
+        // other TabView sync OffsetY
         tabViewScrollHandler = (e) => {
             const { headerHeight, isActive } = this.props;
             if (!isActive) {
@@ -63,7 +63,7 @@ const compose = (WrappedComponent) => {
             }
         };
 
-        // 内容高度变化后，参数调整offset
+        // contentHeight changed，adjust offset
         adjustScrollOffset = () => {
             if (this.mounted) {
                 this.mounted = false;
@@ -73,6 +73,7 @@ const compose = (WrappedComponent) => {
             }
         };
 
+        // calculate the bottom occupancy height
         onContentSizeChange = (contentWidth, contentHeight) => {
             const { bottomPadding } = this.state;
             const { headerHeight, sceneHeight } = this.props;
@@ -82,7 +83,7 @@ const compose = (WrappedComponent) => {
                 const makePaddingBottom = sceneHeight - contentHeight;
                 this.setState({ bottomPadding: makePaddingBottom });
             } else if (remainingHeight > 1) {
-                // 内容高度超过容器高度，调整Tab的Offset，并且减少多余占位高bottomPadding
+                // The content height exceeds the container height，adjust Tab Offset，and reduce excess occupancy bottomPadding
                 this.adjustScrollOffset();
                 const newBottomPadding = remainingHeight > bottomPadding ? 0 : bottomPadding - remainingHeight;
                 if (newBottomPadding != bottomPadding) {
@@ -107,7 +108,7 @@ const compose = (WrappedComponent) => {
         };
 
         render() {
-            const { isActive, children, headerHeight, forwardedRef, ...restProps } = this.props;
+            const { isActive, children, headerHeight, forwardedRef, contentContainerStyle, ...restProps } = this.props;
             const { bottomPadding } = this.state;
             const scrollListener = this.getScrollListener(isActive);
             return (
@@ -125,6 +126,7 @@ const compose = (WrappedComponent) => {
                     onScroll={scrollListener}
                     onContentSizeChange={this.onContentSizeChange}
                     contentContainerStyle={{
+                        ...contentContainerStyle,
                         paddingTop: headerHeight,
                         paddingBottom: bottomPadding,
                     }}
