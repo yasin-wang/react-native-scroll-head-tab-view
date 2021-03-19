@@ -17,7 +17,7 @@ yarn add react-native-scroll-head-tab-view;
 ```
 import React, { useState, useCallback } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
-import ScrollTabView, { ScrollView, FlatList } from 'react-native-scroll-head-tab-view';
+import { ScrollTabView, ScrollView, FlatList } from 'react-native-scroll-head-tab-view';
 
 function TabView1(props) {
     const data = new Array(200).fill({});
