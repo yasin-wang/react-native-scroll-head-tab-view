@@ -1,5 +1,15 @@
 import React, { Component, RefObject } from 'react';
-import { View, Animated, ScrollView, Dimensions, Platform, StyleSheet, ViewStyle, TextStyle } from 'react-native';
+import {
+    View,
+    Animated,
+    ScrollView,
+    Dimensions,
+    Platform,
+    StyleSheet,
+    ViewStyle,
+    TextStyle,
+    InteractionManager,
+} from 'react-native';
 import ViewPager from '@react-native-community/viewpager';
 import SceneComponent from './components/SceneComponent';
 import DefaultTabBar from './components/DefaultTabBar';
@@ -107,6 +117,15 @@ export default class ScrollableTabView extends Component<Props> {
         };
     }
 
+    componentDidMount() {
+        // Fix（ViewPager version > 5.X）initialPage does not work on Android with Hermes
+        if (!IS_IOS && this.props.initialPage >= 0) {
+            InteractionManager.runAfterInteractions(() => {
+                this.goToPage(this.props.initialPage);
+            });
+        }
+    }
+
     componentDidUpdate(prevProps) {
         if (this.props.children !== prevProps.children) {
             this.updateSceneKeys({ page: this.state.currentPage, children: this.props.children });
@@ -133,14 +152,14 @@ export default class ScrollableTabView extends Component<Props> {
         if (IS_IOS) {
             const offset = pageNumber * this.state.containerWidth;
             if (this.scrollView) {
-                this.scrollView.getNode().scrollTo({ x: offset, y: 0, animated: !this.props.scrollWithoutAnimation });
+                this.scrollView.scrollTo({ x: offset, y: 0, animated: !this.props.scrollWithoutAnimation });
             }
         } else {
             if (this.scrollView) {
                 if (this.props.scrollWithoutAnimation) {
-                    this.scrollView.getNode().setPageWithoutAnimation(pageNumber);
+                    this.scrollView.setPageWithoutAnimation(pageNumber);
                 } else {
-                    this.scrollView.getNode().setPage(pageNumber);
+                    this.scrollView.setPage(pageNumber);
                 }
             }
         }
