@@ -1,6 +1,6 @@
 {
   "name": "react-native-scroll-head-tab-view",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Based on react-native-scrollable-tab-view, the header slides with each tab, and the TabBar reaches a certain sliding distance to attach to the top",
   "main": "index.ts",
   "scripts": {},
