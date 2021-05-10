@@ -28,6 +28,7 @@ interface Props {
     textStyle: TextStyle;
     renderTab: (p: any) => void;
     underlineStyle: ViewStyle;
+    tabUnderlineWidth?: number;
 }
 
 const DEFAULT_PROPS = {
@@ -41,7 +42,7 @@ const DEFAULT_PROPS = {
     underlineStyle: {},
 };
 
-class ScrollableTabBar extends Component<Props> {
+export default class ScrollableTabBar extends Component<Props> {
     static defaultProps = DEFAULT_PROPS;
 
     constructor(props: Props) {
@@ -52,6 +53,14 @@ class ScrollableTabBar extends Component<Props> {
             _widthTabUnderline: new Animated.Value(0),
             _containerWidth: null,
         };
+        this.updateView = this.updateView.bind(this);
+        this.necessarilyMeasurementsCompleted = this.necessarilyMeasurementsCompleted.bind(this);
+        this.updateTabPanel = this.updateTabPanel.bind(this);
+        this.updateTabUnderline = this.updateTabUnderline.bind(this);
+        this.renderTab = this.renderTab.bind(this);
+        this.measureTab = this.measureTab.bind(this);
+        this.onTabContainerLayout = this.onTabContainerLayout.bind(this);
+        this.onContainerLayout = this.onContainerLayout.bind(this);
     }
 
     componentDidMount() {
@@ -108,7 +117,6 @@ class ScrollableTabBar extends Component<Props> {
     updateTabUnderline(position, pageOffset, tabCount) {
         const lineLeft = this._tabsMeasurements[position].left;
         const lineRight = this._tabsMeasurements[position].right;
-
         if (position < tabCount - 1) {
             const nextTabLeft = this._tabsMeasurements[position + 1].left;
             const nextTabRight = this._tabsMeasurements[position + 1].right;
@@ -116,11 +124,19 @@ class ScrollableTabBar extends Component<Props> {
             const newLineLeft = pageOffset * nextTabLeft + (1 - pageOffset) * lineLeft;
             const newLineRight = pageOffset * nextTabRight + (1 - pageOffset) * lineRight;
 
-            this.state._leftTabUnderline.setValue(newLineLeft);
-            this.state._widthTabUnderline.setValue(newLineRight - newLineLeft);
+            const originWidth = newLineRight - newLineLeft;
+            const calcWidthUnderline = Math.min(this.props.tabUnderlineWidth || originWidth * 0.6, originWidth);
+            const calcLeftUnderline = newLineLeft + (originWidth - calcWidthUnderline) / 2;
+
+            this.state._leftTabUnderline.setValue(calcLeftUnderline);
+            this.state._widthTabUnderline.setValue(calcWidthUnderline);
         } else {
-            this.state._leftTabUnderline.setValue(lineLeft);
-            this.state._widthTabUnderline.setValue(lineRight - lineLeft);
+            const originWidth = lineRight - lineLeft;
+            const calcWidthUnderline = Math.min(this.props.tabUnderlineWidth || originWidth * 0.6, originWidth);
+            const calcLeftUnderline = lineLeft + (originWidth - calcWidthUnderline) / 2;
+
+            this.state._leftTabUnderline.setValue(calcLeftUnderline);
+            this.state._widthTabUnderline.setValue(calcWidthUnderline);
         }
     }
 
