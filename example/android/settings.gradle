@@ -1,0 +1,12 @@
+pluginManagement { includeBuild("../../node_modules/@react-native/gradle-plugin") }
+plugins { id("com.facebook.react.settings") }
+extensions.configure(com.facebook.react.ReactSettingsExtension) { ex ->
+    ex.autolinkLibrariesFromCommand([
+        "node",
+        file("../../node_modules/react-native/cli.js").absolutePath,
+        "config"
+    ])
+}
+rootProject.name = 'ScrollHeadTabViewExample'
+include ':app'
+includeBuild('../../node_modules/@react-native/gradle-plugin')

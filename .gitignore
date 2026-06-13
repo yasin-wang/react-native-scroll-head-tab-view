@@ -1,5 +1,24 @@
 # node.js
 #
 node_modules/
+.npm-cache/
 npm-debug.log
 yarn-error.log
+
+# Builds and tests
+lib/
+coverage/
+*.tgz
+
+# Native tooling
+example/android/.gradle/
+example/android/app/build/
+example/android/build/
+example/ios/Pods/
+example/ios/build/
+example/.bundle/
+
+# Editors and operating systems
+.DS_Store
+.idea/
+.vscode/

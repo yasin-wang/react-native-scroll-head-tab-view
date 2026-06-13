@@ -1,0 +1,14 @@
+{
+  "extends": "@react-native/typescript-config",
+  "compilerOptions": {
+    "allowJs": false,
+    "declaration": true,
+    "exactOptionalPropertyTypes": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "noUncheckedIndexedAccess": true,
+    "strict": true
+  },
+  "include": ["src", "__tests__", "jest.setup.js"],
+  "exclude": ["lib", "node_modules", "example"]
+}

@@ -1,33 +1,142 @@
 {
   "name": "react-native-scroll-head-tab-view",
-  "version": "1.0.9",
-  "description": "Based on react-native-scrollable-tab-view, the header slides with each tab, and the TabBar reaches a certain sliding distance to attach to the top",
-  "main": "index.ts",
-  "scripts": {},
+  "version": "2.0.0",
+  "description": "Collapsible headers and sticky tab bars for React Native PagerView scenes",
+  "source": "./src/index.ts",
+  "main": "./lib/commonjs/index.js",
+  "module": "./lib/module/index.js",
+  "types": "./lib/typescript/commonjs/index.d.ts",
+  "react-native": "./src/index.ts",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "react-native": {
+        "types": "./lib/typescript/module/index.d.ts",
+        "default": "./lib/module/index.js"
+      },
+      "import": {
+        "types": "./lib/typescript/module/index.d.ts",
+        "default": "./lib/module/index.js"
+      },
+      "require": {
+        "types": "./lib/typescript/commonjs/index.d.ts",
+        "default": "./lib/commonjs/index.js"
+      },
+      "default": {
+        "types": "./lib/typescript/commonjs/index.d.ts",
+        "default": "./lib/commonjs/index.js"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "src",
+    "lib",
+    "README.md",
+    "README.zh-CN.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "workspaces": [
+    "example"
+  ],
+  "packageManager": "npm@10.9.0",
+  "scripts": {
+    "build": "bob build",
+    "clean": "rimraf lib coverage",
+    "example:typecheck": "npm run typecheck --workspace example",
+    "format": "node node_modules/prettier/bin/prettier.cjs --write .",
+    "format:check": "node node_modules/prettier/bin/prettier.cjs --check .",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "pack:check": "npm pack --dry-run --cache .npm-cache",
+    "prepack": "bob build",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "typecheck": "tsc --noEmit",
+    "validate": "npm run format:check && npm run lint && npm run typecheck && npm run example:typecheck && npm test && npm run build && npm run pack:check"
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wangyukun-hxb/react-native-scroll-head-tab-view.git"
+    "url": "git+https://github.com/yasin-wang/react-native-scroll-head-tab-view.git"
   },
   "keywords": [
     "react-native",
-    "scrollable",
-    "tab-view"
+    "collapsible-header",
+    "sticky-tabs",
+    "pager-view",
+    "flatlist",
+    "scrollview"
   ],
-  "author": "wangyukun <wangyukun@haxibiao.com> (https://github.com/wangyukun-hxb)",
+  "author": "wangyukun <wangyukun@haxibiao.com> (https://github.com/yasin-wang)",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/wangyukun-hxb/react-native-scroll-head-tab-view/issues"
+    "url": "https://github.com/yasin-wang/react-native-scroll-head-tab-view/issues"
   },
-  "homepage": "https://github.com/wangyukun-hxb/react-native-scroll-head-tab-view#readme",
+  "homepage": "https://github.com/yasin-wang/react-native-scroll-head-tab-view#readme",
+  "engines": {
+    "node": ">=22.12"
+  },
   "peerDependencies": {
-    "react-native": ">=0.50.0",
-    "@react-native-community/viewpager": "^2.0.1"
-  },
-  "dependencies": {
-    "memoize-one": "^5.1.1"
+    "react": ">=19.1.0",
+    "react-native": ">=0.82.0",
+    "react-native-pager-view": ">=7.0.0"
   },
   "devDependencies": {
-    "eslint": "^7.6.0",
-    "typescript": "^3.9.7"
+    "@babel/core": "^7.28.0",
+    "@react-native/babel-preset": "0.86.0",
+    "@react-native/eslint-config": "0.86.0",
+    "@react-native/typescript-config": "0.86.0",
+    "@testing-library/react-native": "^13.3.3",
+    "@types/jest": "^29.5.14",
+    "@types/react": "^19.1.0",
+    "eslint": "^8.57.1",
+    "jest": "^29.7.0",
+    "prettier": "^3.6.2",
+    "react": "^19.2.0",
+    "react-native": "0.86.0",
+    "react-native-builder-bob": "^0.42.1",
+    "react-native-pager-view": "^8.0.2",
+    "react-test-renderer": "^19.2.0",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.9.2"
+  },
+  "react-native-builder-bob": {
+    "source": "src",
+    "output": "lib",
+    "targets": [
+      [
+        "commonjs",
+        {
+          "esm": true
+        }
+      ],
+      [
+        "module",
+        {
+          "esm": true
+        }
+      ],
+      [
+        "typescript",
+        {
+          "project": "tsconfig.build.json"
+        }
+      ]
+    ]
+  },
+  "jest": {
+    "preset": "react-native",
+    "setupFilesAfterEnv": [
+      "<rootDir>/jest.setup.js"
+    ],
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/example/"
+    ],
+    "watchman": false,
+    "collectCoverageFrom": [
+      "src/**/*.{ts,tsx}",
+      "!src/index.ts"
+    ]
   }
 }
